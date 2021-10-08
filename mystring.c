@@ -1,26 +1,6 @@
 #include <stdio.h>
 #include "mystring.h"
 
-int main() {
-    // char *str = "";
-
-    // printf("%d\n", mystrlen(str));
-
-    // char str1[10] = "hello";
-    // char str2[5] = "bob";
-
-    // mystrcpy(str1, str2);
-    // mystrncpy(str1, str2, 2);
-
-    // mystrcat(str1, str2);
-
-    // char c = mystrchr(str1, 'o');
-
-    // printf("%p\n", c);
-
-    // printf("%s\n", str1);
-}
-
 int mystrlen( char *s ) {
     int len = 0;
 
@@ -54,8 +34,6 @@ char * mystrncpy( char *dest, char *source, int n) {
         dest[i] = source[i];
     }
 
-    dest[n] = '\0';
-
     return ret;
 }
 
@@ -75,13 +53,29 @@ char * mystrcat( char *dest, char *source ) {
     return ret;
 }
 
-char * mystrchr( char *s, char c ) {
-    char *ret;
+int mystrcmp( char *s1, char *s2 ) {
+  
+  while (*s1) {
+    if (*s2 == '\0') return 1;
 
+    if (*s1 < *s2) return -1;
+    else if (*s1 > *s2) return 1;
+
+    s1++;
+    s2++;
+  }
+
+  if (*s1 == *s2) return 0;
+  return -1;
+}
+
+char * mystrchr( char *s, char c ) {
     while (*s) {
-        if (*s == c) ret = s;
+        if (*s == c) return s;
         s++;
     }
 
-    return ret;
+    if (*(s + 1) == c && c == '\0') return s;
+
+    return NULL;
 }
